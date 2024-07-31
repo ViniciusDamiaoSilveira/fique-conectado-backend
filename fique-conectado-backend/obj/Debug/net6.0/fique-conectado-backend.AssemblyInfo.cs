@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fique-conectado-backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+da22ab128af60f629a06e3691a4d083b7ce7d033")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+87e767be51906374959d88eb2a0b2f66a8cf5747")]
 [assembly: System.Reflection.AssemblyProductAttribute("fique-conectado-backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fique-conectado-backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
