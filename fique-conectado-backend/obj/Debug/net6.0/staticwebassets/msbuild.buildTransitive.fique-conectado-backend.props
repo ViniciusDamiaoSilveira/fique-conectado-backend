@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\fique-conectado-backend.props" />
+</Project>
