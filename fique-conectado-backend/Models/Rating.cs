@@ -16,16 +16,16 @@ namespace fique_conectado_backend.Models
         public virtual string EntertainmentId { get; set; }
         public float NumRating { get; set; }
         public string Comment { get; set; }
-        public DateTime date { get; set; }
+        public string Date { get; set; }
 
-        public Rating(Guid id, Guid userId, string entertainmentId, float numRating, string comment, DateTime date)
+        public Rating(Guid id, Guid userId, string entertainmentId, float numRating, string comment, string date)
         {
             Id = id;
             UserId = userId;
             EntertainmentId = entertainmentId;
             NumRating = numRating;
             Comment = comment;
-            this.date = date;
+            Date = date;
         }
 
 

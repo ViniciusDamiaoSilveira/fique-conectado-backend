@@ -19,19 +19,55 @@ namespace fique_conectado_backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddRating([FromBody] RatingDTO.Add obj)
+        public async Task<IActionResult> AddRating([FromBody] Rating obj)
         {
             if (obj == null) return BadRequest();
-            if (!CheckUserIdAsync(obj.userId)) return BadRequest(new { Message = "Usuário não existe" });
-            if (CheckRatingAsync(obj.userId, obj.entertainmentId)) return BadRequest(new { Message = "Usuário já adicionou uma nota" });
+            if (!CheckUserIdAsync(obj.UserId)) return BadRequest(new { Message = "Usuário não existe" });
+            if (CheckRatingAsync(obj.UserId, obj.EntertainmentId)) return BadRequest(new { Message = "Usuário já adicionou uma nota" });
 
-            Rating rating = new Rating(Guid.NewGuid(), obj.userId, obj.entertainmentId, obj.numRating, obj.comment, DateTime.Now);
-
-            await _context.Ratings.AddAsync(rating);
+            await _context.Ratings.AddAsync(obj);
             await _context.SaveChangesAsync();
 
             return Ok(new { Message = "Nota adicionada" });
+        }
 
+        [HttpPost("verify")]
+        public async Task<IActionResult> VerifyRating([FromBody] RatingDTO.Verify obj)
+        {
+            var verify = await _context.Ratings.Where(rating => rating.UserId == obj.userId && rating.EntertainmentId == obj.entertainmentId).ToListAsync();
+
+            if (verify.Count > 0)
+            {
+                return Ok(verify[0]);
+            } else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetRatings([FromRoute] Guid userId)
+        {
+           if (!CheckUserIdAsync(userId)) return BadRequest(new { Message = "Usuário não existe" });
+
+            var ratings = await _context.Ratings.Where(rating => rating.UserId == userId).ToListAsync();
+            return Ok(ratings);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> editRating([FromBody] RatingDTO.Put obj)
+        {
+            var rating = await _context.Ratings.FirstOrDefaultAsync(ratings => ratings.Id == obj.ratingId);
+
+            if (rating == null) return BadRequest(new { Message = "Não existe essa crítica" });
+
+            rating.NumRating = obj.numRating;
+            rating.Comment = obj.comment;
+            rating.Date = obj.date;
+
+            _context.Ratings.Update(rating);
+            await _context.SaveChangesAsync();
+            return Ok(new { Message = "Crítica alterada" });
         }
 
         private bool CheckUserIdAsync(Guid userId)

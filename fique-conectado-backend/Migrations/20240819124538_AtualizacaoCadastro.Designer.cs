@@ -11,8 +11,8 @@ using fique_conectado_backend.Context;
 namespace fique_conectado_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240725195851_last-class-add")]
-    partial class lastclassadd
+    [Migration("20240819124538_AtualizacaoCadastro")]
+    partial class AtualizacaoCadastro
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,10 +21,23 @@ namespace fique_conectado_backend.Migrations
 
             modelBuilder.Entity("fique_conectado_backend.Models.Entertainment", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ApiId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PathPoster")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Release")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -56,7 +69,34 @@ namespace fique_conectado_backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("list", (string)null);
+                });
+
+            modelBuilder.Entity("fique_conectado_backend.Models.ListEntertainment", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EntertainmentId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("EntertainmentId1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ListId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("EntertainmentId1");
+
+                    b.HasIndex("ListId");
+
+                    b.ToTable("listEntertainments", (string)null);
                 });
 
             modelBuilder.Entity("fique_conectado_backend.Models.Rating", b =>
@@ -73,6 +113,9 @@ namespace fique_conectado_backend.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("EntertainmentId1")
+                        .HasColumnType("TEXT");
+
                     b.Property<float>("NumRating")
                         .HasColumnType("REAL");
 
@@ -83,6 +126,10 @@ namespace fique_conectado_backend.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EntertainmentId1");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("rating", (string)null);
                 });
@@ -119,6 +166,60 @@ namespace fique_conectado_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("user", (string)null);
+                });
+
+            modelBuilder.Entity("fique_conectado_backend.Models.List", b =>
+                {
+                    b.HasOne("fique_conectado_backend.Models.User", null)
+                        .WithMany("Lists")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("fique_conectado_backend.Models.ListEntertainment", b =>
+                {
+                    b.HasOne("fique_conectado_backend.Models.Entertainment", null)
+                        .WithMany("ListEntertainments")
+                        .HasForeignKey("EntertainmentId1");
+
+                    b.HasOne("fique_conectado_backend.Models.List", null)
+                        .WithMany("ListEntertainments")
+                        .HasForeignKey("ListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("fique_conectado_backend.Models.Rating", b =>
+                {
+                    b.HasOne("fique_conectado_backend.Models.Entertainment", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("EntertainmentId1");
+
+                    b.HasOne("fique_conectado_backend.Models.User", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("fique_conectado_backend.Models.Entertainment", b =>
+                {
+                    b.Navigation("ListEntertainments");
+
+                    b.Navigation("Ratings");
+                });
+
+            modelBuilder.Entity("fique_conectado_backend.Models.List", b =>
+                {
+                    b.Navigation("ListEntertainments");
+                });
+
+            modelBuilder.Entity("fique_conectado_backend.Models.User", b =>
+                {
+                    b.Navigation("Lists");
+
+                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }
