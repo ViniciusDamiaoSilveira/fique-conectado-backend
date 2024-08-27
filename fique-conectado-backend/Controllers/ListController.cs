@@ -14,8 +14,6 @@ namespace fique_conectado_backend.Controllers
     {
         private readonly AppDbContext _context;
 
-
-
         public ListController(AppDbContext appDbContext)
         {
             _context = appDbContext;
@@ -24,8 +22,9 @@ namespace fique_conectado_backend.Controllers
         [HttpGet("user/{userId}")]
         public async Task<IActionResult> GetUserLists([FromRoute] string userId)
         {
-            var lists = await _context.Lists.Where(list => list.UserId == Guid.Parse(userId)).ToListAsync();
-            return Ok(lists);
+            var lists_duplicates = await _context.Lists.Where(list => list.UserId == Guid.Parse(userId)).ToListAsync();
+            var lists_response = lists_duplicates.GroupBy(x => x.Name).Select(x => x.First()).ToList();
+            return Ok(lists_response);
         }
 
         [HttpPost]

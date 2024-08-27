@@ -19,10 +19,23 @@ namespace fique_conectado_backend.Migrations
 
             modelBuilder.Entity("fique_conectado_backend.Models.Entertainment", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ApiId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PathPoster")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Release")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -69,12 +82,15 @@ namespace fique_conectado_backend.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("EntertainmentId1")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("ListId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("id");
 
-                    b.HasIndex("EntertainmentId");
+                    b.HasIndex("EntertainmentId1");
 
                     b.HasIndex("ListId");
 
@@ -95,6 +111,9 @@ namespace fique_conectado_backend.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("EntertainmentId1")
+                        .HasColumnType("TEXT");
+
                     b.Property<float>("NumRating")
                         .HasColumnType("REAL");
 
@@ -106,7 +125,7 @@ namespace fique_conectado_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EntertainmentId");
+                    b.HasIndex("EntertainmentId1");
 
                     b.HasIndex("UserId");
 
@@ -160,9 +179,7 @@ namespace fique_conectado_backend.Migrations
                 {
                     b.HasOne("fique_conectado_backend.Models.Entertainment", null)
                         .WithMany("ListEntertainments")
-                        .HasForeignKey("EntertainmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EntertainmentId1");
 
                     b.HasOne("fique_conectado_backend.Models.List", null)
                         .WithMany("ListEntertainments")
@@ -175,9 +192,7 @@ namespace fique_conectado_backend.Migrations
                 {
                     b.HasOne("fique_conectado_backend.Models.Entertainment", null)
                         .WithMany("Ratings")
-                        .HasForeignKey("EntertainmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EntertainmentId1");
 
                     b.HasOne("fique_conectado_backend.Models.User", null)
                         .WithMany("Ratings")

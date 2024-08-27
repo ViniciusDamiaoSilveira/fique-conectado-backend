@@ -45,11 +45,14 @@ namespace fique_conectado_backend.Controllers
             var user = await _context.Users
                 .FirstOrDefaultAsync(user => user.Username == userLogin.username);
 
+
             if (!PasswordHasher.VerifyPassword(userLogin.password, user.Password))
                 return BadRequest(new { Message = "Senha incorreta" });
 
             user.Token = CreateJwt(user);
-            
+
+            await _context.SaveChangesAsync();
+
             return Ok(new 
             { 
                 Token = user.Token,
@@ -76,6 +79,27 @@ namespace fique_conectado_backend.Controllers
 
 
             User user = new User(Guid.NewGuid(), userRegister.username, hashPassword, userRegister.email, userRegister.phone, "User", "");
+
+            List listFav1 = new List(Guid.NewGuid(), "Favoritos", "Movie", user.Id);
+            List listFav2 = new List(Guid.NewGuid(), "Favoritos", "Serie", user.Id);
+            List listFav3 = new List(Guid.NewGuid(), "Favoritos", "Game", user.Id);
+            await _context.Lists.AddAsync(listFav1);
+            await _context.Lists.AddAsync(listFav2);
+            await _context.Lists.AddAsync(listFav3);
+
+            List listSave1 = new List(Guid.NewGuid(), "Salvos", "Movie", user.Id);
+            List listSave2 = new List(Guid.NewGuid(), "Salvos", "Serie", user.Id);
+            List listSave3 = new List(Guid.NewGuid(), "Salvos", "Game", user.Id);
+            await _context.Lists.AddAsync(listSave1);
+            await _context.Lists.AddAsync(listSave2);
+            await _context.Lists.AddAsync(listSave3);
+
+            List listRated1 = new List(Guid.NewGuid(), "Classificados", "Movie", user.Id);
+            List listRated2 = new List(Guid.NewGuid(), "Classificados", "Serie", user.Id);
+            List listRated3 = new List(Guid.NewGuid(), "Classificados", "Game", user.Id);
+            await _context.Lists.AddAsync(listRated1);
+            await _context.Lists.AddAsync(listRated2);
+            await _context.Lists.AddAsync(listRated3);
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
@@ -110,8 +134,8 @@ namespace fique_conectado_backend.Controllers
             var key = Encoding.ASCII.GetBytes("b7800cd7-a125-4b02-8a32-1ad594ea3aef");
             var identity = new ClaimsIdentity(new Claim[]
             {
-                new Claim(type: "Id", user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(type: "id", user.Id.ToString()),
+                new Claim(type: "username", user.Username),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Type),
             });
