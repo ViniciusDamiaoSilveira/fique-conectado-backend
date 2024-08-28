@@ -66,8 +66,7 @@
               "RelativeToolTip": "fique-conectado-backend\\Controllers\\ListEntertainmentController.cs",
               "ViewState": "AgIAACwAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-27T12:06:36.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-27T12:06:36.004Z"
             },
             {
               "$type": "Document",
@@ -79,8 +78,7 @@
               "RelativeToolTip": "fique-conectado-backend\\Controllers\\EntertainmentController.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-27T12:06:32.613Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-27T12:06:32.613Z"
             },
             {
               "$type": "Document",
@@ -92,8 +90,7 @@
               "RelativeToolTip": "fique-conectado-backend\\Controllers\\UserController.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-27T11:40:42.388Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-27T11:40:42.388Z"
             },
             {
               "$type": "Document",
@@ -105,8 +102,7 @@
               "RelativeToolTip": "fique-conectado-backend\\DTO\\RatingDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T22:44:15.207Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T22:44:15.207Z"
             },
             {
               "$type": "Document",
@@ -118,8 +114,7 @@
               "RelativeToolTip": "fique-conectado-backend\\Controllers\\ListController.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAAAABgAAAB0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T22:24:42.449Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T22:24:42.449Z"
             },
             {
               "$type": "Document",
@@ -129,7 +124,7 @@
               "RelativeDocumentMoniker": "fique-conectado-backend\\Controllers\\RatingController.cs",
               "ToolTip": "C:\\projects\\fique-conectado-backend\\fique-conectado-backend\\Controllers\\RatingController.cs",
               "RelativeToolTip": "fique-conectado-backend\\Controllers\\RatingController.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAAADEAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAQwDkAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-26T22:17:28.724Z",
               "EditorCaption": ""
@@ -144,8 +139,7 @@
               "RelativeToolTip": "fique-conectado-backend\\Models\\Rating.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAD4vxwAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T19:38:11.398Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-25T19:38:11.398Z"
             }
           ]
         }
